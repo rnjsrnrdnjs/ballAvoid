@@ -168,16 +168,16 @@ function draw() {
 	if (!tof) return;
 	for(var i=0;i<rdimg.length;i++){
 		if(rdimg[i].state==0){
-			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,5,5);
 		}
 		else if(rdimg[i].state==1){
-			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,5,5);
 		}
 		else if(rdimg[i].state==2){
-			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,5,5);
 		}
 		else if(rdimg[i].state==3){
-			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,5,5);
 		}
 	}
 	for (let i = 0; i < balls.length; i++) {
@@ -216,7 +216,6 @@ function ballPush() {
 	var cball = new Ball(wall.right / 2, wall.bottom / 2, R);
 	cball.setVelocityAsRandom(0.2, 0.5).setColor(0);
 	balls.push(cball);
-	/*
 	var rd=Math.floor(Math.random()*4);
 	var w=Math.random()*canvas.width;
 	var h=Math.random()*canvas.height;
@@ -225,7 +224,6 @@ function ballPush() {
 	else if(rd==1) rdimg.push({state:1,width:w,height:h});
 	else if(rd==2) rdimg.push({state:2,width:w,height:h});
 	else if(rd==3) rdimg.push({state:3,width:w,height:h});
-	*/
 }
 
 // Ball 생성자
