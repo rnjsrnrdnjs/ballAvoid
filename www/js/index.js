@@ -6,6 +6,7 @@ var ctx;
 var wall;
 // 공 객체를 NBALL 개 만들어 배열 balls에 저장
 var balls = [];
+var rdimg = [] ;
 var myball = {};
 var TIME_INTERVAL = 33;
 var maxHigh = 0;
@@ -16,6 +17,7 @@ var tof = true;
 var moveX, moveY;
 var downclick=false;
 var playTrue=false;
+var stp,ght,grd,sup;
 function disableScroll() {
 	document.body.classList.add('stop-scrolling');
 }
@@ -32,7 +34,17 @@ window.onload = function () {
 	myball = new Ball(wall.right / 4, wall.bottom / 4, R + 2);
 	myball.setColor(1);
 	myball.collisionWall(wall).draw(ctx);
-
+	stp=new Image();
+	stp.src="../img/stp.svg";
+	ght=new Image();
+	ght.src="../img/ght.svg";
+	grd=new Image();
+	grd.src="../img/grd.svg";
+	sup=new Image();
+	sup.src="../img/sup.svg";
+	
+	
+	
 	var one = document.getElementById('one');
 	one.addEventListener('touchstart', down,false);
 	one.addEventListener('touchmove', move,false);
@@ -62,6 +74,10 @@ window.onload = function () {
 		}
 		onTouch = true;
 	}
+
+
+
+
 	var moveMax = one.height / 4;
 	function move(event) {
 		if (onTouch) {
@@ -150,7 +166,21 @@ function end() {
 function draw() {
 	//공과 공 맞닿은 처리
 	if (!tof) return;
-	for (i = 0; i < balls.length; i++) {
+	for(var i=0;i<rdimg.length;i++){
+		if(rdimg[i].state==0){
+			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,20,20);
+		}
+		else if(rdimg[i].state==1){
+			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,20,20);
+		}
+		else if(rdimg[i].state==2){
+			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,20,20);
+		}
+		else if(rdimg[i].state==3){
+			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,20,20);
+		}
+	}
+	for (let i = 0; i < balls.length; i++) {
 		if (
 			Math.sqrt(
 				Math.abs(myball.y - balls[i].y) * Math.abs(myball.y - balls[i].y) +
@@ -186,19 +216,14 @@ function ballPush() {
 	var cball = new Ball(wall.right / 2, wall.bottom / 2, R);
 	cball.setVelocityAsRandom(0.2, 0.5).setColor(0);
 	balls.push(cball);
-		var rd=Math.floor(Math.random()*4);
-	if(rd==0){
-		
-	}
-	else if(rd==1){
-			
-	}
-	else if(rd==2){
-			
-	}
-	else if(rd==3){
-			
-	}
+	var rd=Math.floor(Math.random()*4);
+	var w=Math.random()*canvas.width;
+	var h=Math.random()*canvas.height;
+	console.log(rd);
+	if(rd==0) rdimg.push({state:0,width:w,height:h});
+	else if(rd==1) rdimg.push({state:1,width:w,height:h});
+	else if(rd==2) rdimg.push({state:2,width:w,height:h});
+	else if(rd==3) rdimg.push({state:3,width:w,height:h});
 }
 
 // Ball 생성자
