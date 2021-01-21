@@ -13,7 +13,9 @@ var high, low;
 var bP, raf;
 var tof = true;
 //컨트롤바
+var moveX, moveY;
 var downclick=false;
+var playTrue=false;
 function disableScroll() {
 	document.body.classList.add('stop-scrolling');
 }
@@ -44,8 +46,8 @@ window.onload = function () {
 	clearBackground();
 	clearBackground2(0, 0);
 	drawCircle(one.width / 2, one.height / 2, one.height / 5, 'rgb(0,255,255)');
-	var startX,
-		startY,
+	var startX;
+	var	startY;
 		moveX = 0,
 		moveY = 0;
 	var joyPos = one.getBoundingClientRect();
@@ -86,19 +88,16 @@ window.onload = function () {
 			);
 			
 			// 공움직이는 이벤트 추가
-			document.addEventListener("onTouch",moveBall,false);
 		}
 	}
-	function moveBall(){
-		console.log(1);
-			myball.x+=moveX/40;
-			myball.y+=moveY/40;
-	}
+	// onTouch 일때 커스터마이징 이벤트 ㄱㄱ
 	function up() {
 		clearBackground();
 		clearBackground2(0, 0);
 		drawCircle(one.width / 2, one.height / 2, one.height / 5, 'rgb(0,255,255)');
 		onTouch = false;
+		moveY=0;
+		moveX=0;
 	}
 	function clearBackground() {
 		ctx5.clearRect(0, 0, one.width, one.height);
@@ -119,18 +118,33 @@ window.onload = function () {
 		ctx5.arc(x, y, r, 0, 2 * Math.PI);
 		ctx5.fill();
 	}
-
-	start();
+	var str=document.getElementById("start");
+	str.addEventListener('click',(e)=>{
+		start();
+	},false);
 };
 function start() {
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	while(balls.length){
+		balls.pop();
+	}
+	myball = new Ball(wall.right / 4, wall.bottom / 4, R + 2);
+	myball.setColor(1);
+	myball.collisionWall(wall).draw(ctx);
+	tof=true;
 	bP = setInterval(ballPush, 5000);
 	raf = requestAnimationFrame(draw);
 }
 function end() {
-	console.log(2);
 	clearInterval(bP);
-	maxHigh = Math.max(maxHigh, low);
+	maxHigh = Math.max(maxHigh, balls.length);
 	cancelAnimationFrame(raf);
+	high.innerHTML = `최고점수 : ${maxHigh}`;
+	//문구 하나 작성 
+	ctx.font = "30px verdana";
+    ctx.strokeStyle = "white"; //테두리 색상
+    ctx.strokeText("Game Over",canvas.width/5,canvas.height/5);
+    ctx.strokeText(`현재점수:${balls.length}`,canvas.width/5,canvas.height/2);
 }
 
 function draw() {
@@ -154,7 +168,10 @@ function draw() {
 }
 function drawFrame() {
 	// 배경을 검은색으로 칠한다
+	myball.x+=moveX/40;
+    myball.y+=moveY/40;
 	myball.collisionWall(wall).draw(ctx);
+
 	ctx.fillStyle = 'rgba(0,0,0,' + BACK_ALPHA + ')';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	//myball.move().collisionWall(wall).draw(ctx);
@@ -169,6 +186,19 @@ function ballPush() {
 	var cball = new Ball(wall.right / 2, wall.bottom / 2, R);
 	cball.setVelocityAsRandom(0.2, 0.5).setColor(0);
 	balls.push(cball);
+		var rd=Math.floor(Math.random()*4);
+	if(rd==0){
+		
+	}
+	else if(rd==1){
+			
+	}
+	else if(rd==2){
+			
+	}
+	else if(rd==3){
+			
+	}
 }
 
 // Ball 생성자
