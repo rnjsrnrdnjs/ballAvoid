@@ -190,7 +190,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 40
+				myball.r + canvas.width / 30
 			) {
 				rdimg.splice(i, 1);
 				item = 0;
@@ -210,7 +210,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 40
+				myball.r + canvas.width / 30
 			) {
 				rdimg.splice(i, 1);
 				item = 1;
@@ -230,7 +230,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 40
+				myball.r + canvas.width / 30
 			) {
 				rdimg.splice(i, 1);
 				item = 2;
@@ -250,7 +250,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 40
+				myball.r + canvas.width / 30
 			) {
 				rdimg.splice(i, 1);
 				item = 3;
@@ -268,9 +268,9 @@ function draw() {
 				myball.r + canvas.width / 40 + balls[i].r
 			) {
 				if (balls[i].vx < 0) this.vx *= -1;
-				else if (balls[i].vx > 0) this.vx *= -1;
-				else if (balls[i].vy < 0) this.vy *= -1;
-				else if (balls[i].vy > 0) this.vy *= -1;
+				if (balls[i].vx > 0) this.vx *= -1;
+				if (balls[i].vy < 0) this.vy *= -1;
+				if (balls[i].vy > 0) this.vy *= -1;
 			}
 		}
 	}
@@ -344,13 +344,15 @@ function drawFrame() {
 	// 배경을 검은색으로 칠한다
 	myball.x += moveX / 40;
 	myball.y += moveY / 40;
-	if (it4) {
+	if (it3) {
 		myball.collisionWall(wall);
 		ctx.drawImage(grd, myball.x, myball.y, canvas.width / 20, canvas.width / 20);
-	} else if (it3) {
+	} 
+	if (it4) {
 		myball.collisionWall(wall);
 		ctx.drawImage(sup, myball.x, myball.y, canvas.width / 20, canvas.width / 20);
-	} else {
+	}
+    else {
 		myball.collisionWall(wall).draw(ctx);
 	}
 	ctx.fillStyle = 'rgba(0,0,0,' + BACK_ALPHA + ')';
