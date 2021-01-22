@@ -136,7 +136,7 @@ window.onload = function () {
 	}
 	var str=document.getElementById("start");
 	str.addEventListener('click',(e)=>{
-		start();
+		if(!tof)start();
 	},false);
 };
 function start() {
@@ -170,16 +170,16 @@ function draw() {
 	if (!tof) return;
 	for(var i=0;i<rdimg.length;i++){
 		if(rdimg[i].state==0){
-			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,30,30);
+			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
 		}
 		else if(rdimg[i].state==1){
-			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,30,30);
+			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
 		}
 		else if(rdimg[i].state==2){
-			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,30,30);
+			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
 		}
 		else if(rdimg[i].state==3){
-			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,30,30);
+			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
 		}
 	}
 	
