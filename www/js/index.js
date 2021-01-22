@@ -265,7 +265,7 @@ function draw() {
 					Math.abs(myball.y + -balls[i].y) * Math.abs(myball.y - balls[i].y) +
 						Math.abs(myball.x - balls[i].x) * Math.abs(myball.x - balls[i].x)
 				) <=
-				myball.r + canvas.width / 40 + balls[i].r
+				myball.r + canvas.width / 30 + balls[i].r
 			) {
 				if (balls[i].vx < 0) this.vx *= -1;
 				if (balls[i].vx > 0) this.vx *= -1;
@@ -371,7 +371,7 @@ function ballPush() {
 	cball.setVelocityAsRandom(0.2, 0.5).setColor(0);
 	balls.push(cball);
 	cnt++;
-	if (cnt == 4) {
+	if (cnt == 3) {
 		var rd = Math.floor(Math.random() * 4);
 		var w = Math.random() * canvas.width;
 		var h = Math.random() * canvas.height;
