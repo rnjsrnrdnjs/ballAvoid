@@ -20,6 +20,7 @@ var playTrue=false;
 var stp,ght,grd,sup;
 var cnt=0;
 var item=-1;
+var it1=false,it2=false,it3=false,it4=false;
 function disableScroll() {
 	document.body.classList.add('stop-scrolling');
 }
@@ -223,6 +224,7 @@ function draw() {
 		}
 	}
 	itemevent();
+	if(!it2){
 	for (let i = 0; i < balls.length; i++) {
 		if (
 			Math.sqrt(
@@ -236,17 +238,27 @@ function draw() {
 			return;
 		}
 	}
-	
+	}
 	drawFrame();
 	requestAnimationFrame(draw);
 }
 
 function itemevent(){
 	if(item==0){
-		
+		if(it1)return;
+		it1=true;
+		setTimeout((e)=>{
+			it1=false;
+		},5000);
+		item=-1;
 	}
 	else if(item==1){
-		
+		if(it2)return;
+		it2=true;
+		setTimeout((e)=>{
+			it2=false;
+		},5000);
+		item=-1;
 	}
 	else if(item==2){
 		
@@ -259,14 +271,17 @@ function drawFrame() {
 	// 배경을 검은색으로 칠한다
 	myball.x+=moveX/40;
     myball.y+=moveY/40;
+	ctx.globalAlpha = 0.5;
 	myball.collisionWall(wall).draw(ctx);
-
+	ctx.globalAlpha = 1;
 	ctx.fillStyle = 'rgba(0,0,0,' + BACK_ALPHA + ')';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	//myball.move().collisionWall(wall).draw(ctx);
 	// 공의 위치를 ​갱신하여 그린다
-	for (i = 0; i < balls.length; i++) {
-		balls[i].move().collisionWall(wall).draw(ctx);
+	if(!it1){
+		for (i = 0; i < balls.length; i++) {
+			balls[i].move().collisionWall(wall).draw(ctx);
+		}
 	}
 	low = document.getElementById('low');
 	low.innerHTML = `현재점수 : ${balls.length}`;
