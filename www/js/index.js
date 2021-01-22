@@ -346,11 +346,11 @@ function drawFrame() {
 	myball.y += moveY / 40;
 	if (it3) {
 		myball.collisionWall(wall);
-		ctx.drawImage(grd, myball.x, myball.y, canvas.width / 20, canvas.width / 20);
+		ctx.drawImage(grd, myball.x-canvas.width/40, myball.y-canvas.width/40, canvas.width / 20, canvas.width / 20);
 	} 
 	if (it4) {
 		myball.collisionWall(wall);
-		ctx.drawImage(sup, myball.x, myball.y, canvas.width / 20, canvas.width / 20);
+		ctx.drawImage(sup, myball.x-canvas.width/40, myball.y-canvas.width/40, canvas.width / 20, canvas.width / 20);
 	}
     else {
 		myball.collisionWall(wall).draw(ctx);
