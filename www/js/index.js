@@ -186,7 +186,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 20
+				myball.r + canvas.width / 40
 			) {
 				rdimg.splice(i, 1);
 				item = 0;
@@ -206,7 +206,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 20
+				myball.r + canvas.width / 40
 			) {
 				rdimg.splice(i, 1);
 				item = 1;
@@ -226,7 +226,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 20
+				myball.r + canvas.width / 40
 			) {
 				rdimg.splice(i, 1);
 				item = 2;
@@ -246,7 +246,7 @@ function draw() {
 						Math.abs(myball.x - rdimg[i].width - canvas.width / 40) *
 							Math.abs(myball.x - rdimg[i].width - canvas.width / 40)
 				) <=
-				myball.r + canvas.width / 20
+				myball.r + canvas.width / 40
 			) {
 				rdimg.splice(i, 1);
 				item = 3;
@@ -323,6 +323,9 @@ function drawFrame() {
 	// 배경을 검은색으로 칠한다
 	myball.x += moveX / 40;
 	myball.y += moveY / 40;
+	if(it2){
+		ctx.globalAlpha = 0.5;
+	}
 	if(it3){
 		myball.collisionWall(wall)
 		ctx.drawImage(grd,myball.x,myball.y,canvas.width/20,canvas.width/20);
