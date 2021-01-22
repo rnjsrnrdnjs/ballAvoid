@@ -267,8 +267,10 @@ function draw() {
 				) <=
 				myball.r+canvas.width / 40 + balls[i].r
 			) {
-				balls[i].collisionWall();
-			}
+			if (balls[i].vx < 0) this.vx *= -1;
+			else if (balls[i].vx > 0) this.vx *= -1;
+			else if (balls[i].vy < 0) this.vy *= -1;
+			else if (balls[i].vy > 0) this.vy *= -1;
 		}
 	}
 	if(it4){
@@ -314,8 +316,10 @@ function itemevent() {
 		item = -1;
 	} else if (item == 1) {
 		if (it2) return;
+		myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 +','+0.3+')';
 		it2 = true;
 		setTimeout((e) => {
+			myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 +','+1+')';
 			it2 = false;
 		}, 5000);
 		item = -1;
@@ -339,20 +343,16 @@ function drawFrame() {
 	// 배경을 검은색으로 칠한다
 	myball.x += moveX / 40;
 	myball.y += moveY / 40;
-	if(it2){
-		ctx.globalAlpha = 0.5;
-	}
-	if(it3){
+	var ggg=false;
+	if(it4){
 		myball.collisionWall(wall)
 		ctx.drawImage(grd,myball.x,myball.y,canvas.width/20,canvas.width/20);
 	}
-	else if(it4){
+	else if(it3){
 		myball.collisionWall(wall)
 		ctx.drawImage(sup,myball.x,myball.y,canvas.width/20,canvas.width/20);
 	}
-	else{
-		myball.collisionWall(wall).draw(ctx);
-	}
+	else myball.collisionWall(wall).draw(ctx);
 	ctx.fillStyle = 'rgba(0,0,0,' + BACK_ALPHA + ')';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	//myball.move().collisionWall(wall).draw(ctx);
