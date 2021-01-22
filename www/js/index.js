@@ -12,7 +12,7 @@ var TIME_INTERVAL = 33;
 var maxHigh = 0;
 var high, low;
 var bP, raf ,itP;
-var tof = true;
+var tof = false;
 //컨트롤바
 var moveX, moveY;
 var downclick=false;
@@ -170,16 +170,16 @@ function draw() {
 	if (!tof) return;
 	for(var i=0;i<rdimg.length;i++){
 		if(rdimg[i].state==0){
-			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
+			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
 		}
 		else if(rdimg[i].state==1){
-			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
+			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
 		}
 		else if(rdimg[i].state==2){
-			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
+			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
 		}
 		else if(rdimg[i].state==3){
-			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,canvas.width/10,canvas.width/10);
+			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
 		}
 	}
 	
