@@ -265,12 +265,28 @@ function draw() {
 					Math.abs(myball.y + -balls[i].y) * Math.abs(myball.y - balls[i].y) +
 						Math.abs(myball.x - balls[i].x) * Math.abs(myball.x - balls[i].x)
 				) <=
-				myball.r + canvas.width / 30 + balls[i].r
+				canvas.width / 30 + balls[i].r
 			) {
-				if (balls[i].vx < 0) this.vx *= -1;
-				if (balls[i].vx > 0) this.vx *= -1;
-				if (balls[i].vy < 0) this.vy *= -1;
-				if (balls[i].vy > 0) this.vy *= -1;
+				if (balls[i].x - balls[i].r < myball.x-canvas.width/30) {
+					// 왼쪽 벽과 충돌했을 때
+					balls[i].x = myball.x-canvas.width/30 + balls[i].r;
+					if (balls[i].vx < 0) balls[i].vx *= -1;
+				}
+				if (balls[i].x + this.r > myball.x+canvas.width/30) {
+					// 오른쪽 벽과 충돌했을 때
+					balls[i].x = myball.x+canvas.width/30 - balls[i].r;
+					if (balls[i].vx > 0) balls[i].vx *= -1;
+				}
+				if (balls[i].y - balls[i].r < myball.y+canvas.width/30) {
+					// 위쪽 벽과 충돌했을 때
+					balls[i].y = myball.y+canvas.width/30 + balls[i].r;
+					if (balls[i].vy < 0) balls[i].vy *= -1;
+				}
+				if (balls[i].y + balls[i].r > myball.y-canvas.width/30) {
+					// 아래쪽 벽과 충돌했을 때
+					balls[i].y = myball.y-canvas.width/30 - balls[i].r;
+					if (balls[i].vy > 0) balls[i].vy *= -1;
+				}
 			}
 		}
 	}
@@ -281,7 +297,7 @@ function draw() {
 					Math.abs(myball.y + -balls[i].y) * Math.abs(myball.y - balls[i].y) +
 						Math.abs(myball.x - balls[i].x) * Math.abs(myball.x - balls[i].x)
 				) <=
-				myball.r + canvas.width / 40 + balls[i].r
+				canvas.width / 30 + balls[i].r
 			) {
 				balls.splice(i, 1);
 				continue;
@@ -317,7 +333,7 @@ function itemevent() {
 		item = -1;
 	} else if (item == 1) {
 		if (it2) return;
-		myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 + ',' + 0.3 + ')';
+		myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 + ',' + 0.2 + ')';
 		it2 = true;
 		setTimeout((e) => {
 			myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 + ',' + 1 + ')';
@@ -346,13 +362,24 @@ function drawFrame() {
 	myball.y += moveY / 40;
 	if (it3) {
 		myball.collisionWall(wall);
-		ctx.drawImage(grd, myball.x-canvas.width/40, myball.y-canvas.width/40, canvas.width / 20, canvas.width / 20);
-	} 
+		ctx.drawImage(
+			grd,
+			myball.x - canvas.width / 40,
+			myball.y - canvas.width / 40,
+			canvas.width / 20,
+			canvas.width / 20
+		);
+	}
 	if (it4) {
 		myball.collisionWall(wall);
-		ctx.drawImage(sup, myball.x-canvas.width/40, myball.y-canvas.width/40, canvas.width / 20, canvas.width / 20);
-	}
-    else {
+		ctx.drawImage(
+			sup,
+			myball.x - canvas.width / 40,
+			myball.y - canvas.width / 40,
+			canvas.width / 20,
+			canvas.width / 20
+		);
+	} else {
 		myball.collisionWall(wall).draw(ctx);
 	}
 	ctx.fillStyle = 'rgba(0,0,0,' + BACK_ALPHA + ')';
