@@ -11,13 +11,15 @@ var myball = {};
 var TIME_INTERVAL = 33;
 var maxHigh = 0;
 var high, low;
-var bP, raf ,itP;
+var bP, raf;
 var tof = false;
 //컨트롤바
 var moveX, moveY;
 var downclick=false;
 var playTrue=false;
 var stp,ght,grd,sup;
+var cnt=0;
+var item=-1;
 function disableScroll() {
 	document.body.classList.add('stop-scrolling');
 }
@@ -149,12 +151,10 @@ function start() {
 	myball.collisionWall(wall).draw(ctx);
 	tof=true;
 	bP = setInterval(ballPush, 5000);
-	itP=setInterval(itemPush,5000);
 	raf = requestAnimationFrame(draw);
 }
 function end() {
 	clearInterval(bP);
-	clearInterval(itP);
 	maxHigh = Math.max(maxHigh, balls.length);
 	cancelAnimationFrame(raf);
 	high.innerHTML = `최고점수 : ${maxHigh}`;
@@ -170,19 +170,59 @@ function draw() {
 	if (!tof) return;
 	for(var i=0;i<rdimg.length;i++){
 		if(rdimg[i].state==0){
-			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
+			ctx.drawImage(stp,rdimg[i].width-canvas.width/40,rdimg[i].height-canvas.width/40,canvas.width/20,canvas.width/20);
+			if (
+			Math.sqrt(
+				Math.abs(myball.y - rdimg[i].height-canvas.width/40) * Math.abs(myball.y - rdimg[i].height-canvas.width/40) +
+					Math.abs(myball.x - rdimg[i].width-canvas.width/40) * Math.abs(myball.x - rdimg[i].width-canvas.width/40)
+			) <=
+			myball.r + canvas.width/20
+			) {
+				rdimg.splice(i,1);
+				item=0;
+			}
 		}
 		else if(rdimg[i].state==1){
-			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
+			ctx.drawImage(ght,rdimg[i].width-canvas.width/40,rdimg[i].height-canvas.width/40,canvas.width/20,canvas.width/20);
+			if (
+			Math.sqrt(
+				Math.abs(myball.y - rdimg[i].height-canvas.width/40) * Math.abs(myball.y - rdimg[i].height-canvas.width/40) +
+					Math.abs(myball.x - rdimg[i].width-canvas.width/40) * Math.abs(myball.x - rdimg[i].width-canvas.width/40)
+			) <=
+			myball.r + canvas.width/20
+			) {
+				rdimg.splice(i,1);
+				item=1;
+			}
 		}
 		else if(rdimg[i].state==2){
-			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
+			ctx.drawImage(grd,rdimg[i].width-canvas.width/40,rdimg[i].height-canvas.width/40,canvas.width/20,canvas.width/20);
+			if (
+			Math.sqrt(
+				Math.abs(myball.y - rdimg[i].height-canvas.width/40) * Math.abs(myball.y - rdimg[i].height-canvas.width/40) +
+					Math.abs(myball.x - rdimg[i].width-canvas.width/40) * Math.abs(myball.x - rdimg[i].width-canvas.width/40)
+			) <=
+			myball.r + canvas.width/20
+			) {
+				rdimg.splice(i,1);
+				item=2;
+			}
 		}
 		else if(rdimg[i].state==3){
-			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,canvas.width/20,canvas.width/20);
+			ctx.drawImage(sup,rdimg[i].width-canvas.width/40,rdimg[i].height-canvas.width/40,canvas.width/20,canvas.width/20);
+			if (
+			Math.sqrt(
+				Math.abs(myball.y - rdimg[i].height-canvas.width/40) * Math.abs(myball.y - rdimg[i].height-canvas.width/40) +
+					Math.abs(myball.x - rdimg[i].width-canvas.width/40) * Math.abs(myball.x - rdimg[i].width-canvas.width/40)
+			) <=
+			myball.r + canvas.width/20
+			) {
+				rdimg.splice(i,1);
+				item=3;
+			}
 		}
 	}
-	
+	itemevent();
 	for (let i = 0; i < balls.length; i++) {
 		if (
 			Math.sqrt(
@@ -196,8 +236,24 @@ function draw() {
 			return;
 		}
 	}
+	
 	drawFrame();
 	requestAnimationFrame(draw);
+}
+
+function itemevent(){
+	if(item==0){
+		
+	}
+	else if(item==1){
+		
+	}
+	else if(item==2){
+		
+	}
+	else if(item==3){
+		
+	}
 }
 function drawFrame() {
 	// 배경을 검은색으로 칠한다
@@ -219,15 +275,17 @@ function ballPush() {
 	var cball = new Ball(wall.right / 2, wall.bottom / 2, R);
 	cball.setVelocityAsRandom(0.2, 0.5).setColor(0);
 	balls.push(cball);
-}
-function itemPush(){
-	var rd=Math.floor(Math.random()*4);
-	var w=Math.random()*canvas.width-30;
-	var h=Math.random()*canvas.height-30;
-	if(rd==0) rdimg.push({state:0,width:w,height:h});
-	else if(rd==1) rdimg.push({state:1,width:w,height:h});
-	else if(rd==2) rdimg.push({state:2,width:w,height:h});
-	else if(rd==3) rdimg.push({state:3,width:w,height:h});
+	cnt++;
+	if(cnt==4){
+		var rd=Math.floor(Math.random()*4);
+		var w=Math.random()*canvas.width;
+		var h=Math.random()*canvas.height;
+		if(rd==0) rdimg.push({state:0,width:w,height:h});
+		else if(rd==1) rdimg.push({state:1,width:w,height:h});
+		else if(rd==2) rdimg.push({state:2,width:w,height:h});
+		else if(rd==3) rdimg.push({state:3,width:w,height:h});
+		cnt=0;
+	}
 }
 
 // Ball 생성자
