@@ -143,6 +143,7 @@ window.onload = function () {
 		false
 	);
 };
+
 function start() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	while (balls.length) {
@@ -258,31 +259,31 @@ function draw() {
 	}
 	itemevent();
 	if (it3) {
-		
 		for (let i = 0; i < balls.length; i++) {
 			if (
 				Math.sqrt(
-					Math.abs(myball.y+ - balls[i].y) * Math.abs(myball.y - balls[i].y) +
+					Math.abs(myball.y + -balls[i].y) * Math.abs(myball.y - balls[i].y) +
 						Math.abs(myball.x - balls[i].x) * Math.abs(myball.x - balls[i].x)
 				) <=
-				myball.r+canvas.width / 40 + balls[i].r
+				myball.r + canvas.width / 40 + balls[i].r
 			) {
-			if (balls[i].vx < 0) this.vx *= -1;
-			else if (balls[i].vx > 0) this.vx *= -1;
-			else if (balls[i].vy < 0) this.vy *= -1;
-			else if (balls[i].vy > 0) this.vy *= -1;
+				if (balls[i].vx < 0) this.vx *= -1;
+				else if (balls[i].vx > 0) this.vx *= -1;
+				else if (balls[i].vy < 0) this.vy *= -1;
+				else if (balls[i].vy > 0) this.vy *= -1;
+			}
 		}
 	}
-	if(it4){
+	if (it4) {
 		for (let i = 0; i < balls.length; i++) {
 			if (
 				Math.sqrt(
-					Math.abs(myball.y+ - balls[i].y) * Math.abs(myball.y - balls[i].y) +
+					Math.abs(myball.y + -balls[i].y) * Math.abs(myball.y - balls[i].y) +
 						Math.abs(myball.x - balls[i].x) * Math.abs(myball.x - balls[i].x)
 				) <=
-				myball.r+canvas.width / 40 + balls[i].r
+				myball.r + canvas.width / 40 + balls[i].r
 			) {
-				balls.splice(i,1);
+				balls.splice(i, 1);
 				continue;
 			}
 		}
@@ -316,10 +317,10 @@ function itemevent() {
 		item = -1;
 	} else if (item == 1) {
 		if (it2) return;
-		myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 +','+0.3+')';
+		myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 + ',' + 0.3 + ')';
 		it2 = true;
 		setTimeout((e) => {
-			myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 +','+1+')';
+			myball.color = 'rgba(' + 0 + ',' + 255 + ',' + 255 + ',' + 1 + ')';
 			it2 = false;
 		}, 5000);
 		item = -1;
@@ -343,16 +344,15 @@ function drawFrame() {
 	// 배경을 검은색으로 칠한다
 	myball.x += moveX / 40;
 	myball.y += moveY / 40;
-	var ggg=false;
-	if(it4){
-		myball.collisionWall(wall)
-		ctx.drawImage(grd,myball.x,myball.y,canvas.width/20,canvas.width/20);
+	if (it4) {
+		myball.collisionWall(wall);
+		ctx.drawImage(grd, myball.x, myball.y, canvas.width / 20, canvas.width / 20);
+	} else if (it3) {
+		myball.collisionWall(wall);
+		ctx.drawImage(sup, myball.x, myball.y, canvas.width / 20, canvas.width / 20);
+	} else {
+		myball.collisionWall(wall).draw(ctx);
 	}
-	else if(it3){
-		myball.collisionWall(wall)
-		ctx.drawImage(sup,myball.x,myball.y,canvas.width/20,canvas.width/20);
-	}
-	else myball.collisionWall(wall).draw(ctx);
 	ctx.fillStyle = 'rgba(0,0,0,' + BACK_ALPHA + ')';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	//myball.move().collisionWall(wall).draw(ctx);
