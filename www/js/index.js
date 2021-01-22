@@ -155,9 +155,6 @@ function start() {
 function end() {
 	clearInterval(bP);
 	clearInterval(itP);
-	while(balls.length){
-		balls.pop();
-	}
 	maxHigh = Math.max(maxHigh, balls.length);
 	cancelAnimationFrame(raf);
 	high.innerHTML = `최고점수 : ${maxHigh}`;
@@ -173,16 +170,16 @@ function draw() {
 	if (!tof) return;
 	for(var i=0;i<rdimg.length;i++){
 		if(rdimg[i].state==0){
-			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,30,30);
 		}
 		else if(rdimg[i].state==1){
-			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,30,30);
 		}
 		else if(rdimg[i].state==2){
-			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,30,30);
 		}
 		else if(rdimg[i].state==3){
-			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,20,20);
+			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,30,30);
 		}
 	}
 	
