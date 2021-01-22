@@ -148,6 +148,9 @@ function start() {
 	while (balls.length) {
 		balls.pop();
 	}
+	while (rdimg.length) {
+		rdimg.pop();
+	}
 	myball = new Ball(wall.right / 4, wall.bottom / 4, R + 2);
 	myball.setColor(1);
 	myball.collisionWall(wall).draw(ctx);
@@ -264,7 +267,7 @@ function draw() {
 				) <=
 				myball.r+canvas.width / 40 + balls[i].r
 			) {
-				ball[i].collisionWall();
+				balls[i].collisionWall();
 			}
 		}
 	}
