@@ -11,7 +11,7 @@ var myball = {};
 var TIME_INTERVAL = 33;
 var maxHigh = 0;
 var high, low;
-var bP, raf;
+var bP, raf ,itP;
 var tof = true;
 //컨트롤바
 var moveX, moveY;
@@ -149,10 +149,15 @@ function start() {
 	myball.collisionWall(wall).draw(ctx);
 	tof=true;
 	bP = setInterval(ballPush, 5000);
+	itP=setInterval(itemPush,20000);
 	raf = requestAnimationFrame(draw);
 }
 function end() {
 	clearInterval(bP);
+	clearInterval(itP);
+	while(balls.length){
+		balls.pop();
+	}
 	maxHigh = Math.max(maxHigh, balls.length);
 	cancelAnimationFrame(raf);
 	high.innerHTML = `최고점수 : ${maxHigh}`;
@@ -217,10 +222,11 @@ function ballPush() {
 	var cball = new Ball(wall.right / 2, wall.bottom / 2, R);
 	cball.setVelocityAsRandom(0.2, 0.5).setColor(0);
 	balls.push(cball);
+}
+function itemPush(){
 	var rd=Math.floor(Math.random()*4);
-	var w=Math.random()*canvas.width;
-	var h=Math.random()*canvas.height;
-	console.log(rd);
+	var w=Math.random()*canvas.width-30;
+	var h=Math.random()*canvas.height-30;
 	if(rd==0) rdimg.push({state:0,width:w,height:h});
 	else if(rd==1) rdimg.push({state:1,width:w,height:h});
 	else if(rd==2) rdimg.push({state:2,width:w,height:h});
