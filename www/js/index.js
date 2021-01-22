@@ -271,7 +271,20 @@ function draw() {
 			}
 		}
 	}
-
+	if(it4){
+		for (let i = 0; i < balls.length; i++) {
+			if (
+				Math.sqrt(
+					Math.abs(myball.y+ - balls[i].y) * Math.abs(myball.y - balls[i].y) +
+						Math.abs(myball.x - balls[i].x) * Math.abs(myball.x - balls[i].x)
+				) <=
+				myball.r+canvas.width / 40 + balls[i].r
+			) {
+				balls.splice(i,1);
+				continue;
+			}
+		}
+	}
 	if (!it2) {
 		for (let i = 0; i < balls.length; i++) {
 			if (
@@ -332,6 +345,10 @@ function drawFrame() {
 	if(it3){
 		myball.collisionWall(wall)
 		ctx.drawImage(grd,myball.x,myball.y,canvas.width/20,canvas.width/20);
+	}
+	else if(it4){
+		myball.collisionWall(wall)
+		ctx.drawImage(sup,myball.x,myball.y,canvas.width/20,canvas.width/20);
 	}
 	else{
 		myball.collisionWall(wall).draw(ctx);
