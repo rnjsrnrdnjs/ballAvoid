@@ -323,16 +323,19 @@ function drawFrame() {
 	// 배경을 검은색으로 칠한다
 	myball.x += moveX / 40;
 	myball.y += moveY / 40;
-	if(it3)
+	if(it3){
+		myball.collisionWall(wall)
 		ctx.drawImage(grd,myball.x,myball.y,canvas.width/20,canvas.width/20);
-	else
+	}
+	else{
 		myball.collisionWall(wall).draw(ctx);
+	}
 	ctx.fillStyle = 'rgba(0,0,0,' + BACK_ALPHA + ')';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	//myball.move().collisionWall(wall).draw(ctx);
 	// 공의 위치를 ​갱신하여 그린다
 	for (i = 0; i < balls.length; i++) {
-		if (!it1) ball[i].move();
+		if (!it1) balls[i].move();
 		balls[i].collisionWall(wall).draw(ctx);
 	}
 	low = document.getElementById('low');
