@@ -149,7 +149,7 @@ function start() {
 	myball.collisionWall(wall).draw(ctx);
 	tof=true;
 	bP = setInterval(ballPush, 5000);
-	itP=setInterval(itemPush,20000);
+	itP=setInterval(itemPush,5000);
 	raf = requestAnimationFrame(draw);
 }
 function end() {
@@ -173,16 +173,16 @@ function draw() {
 	if (!tof) return;
 	for(var i=0;i<rdimg.length;i++){
 		if(rdimg[i].state==0){
-			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,10,10);
+			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,20,20);
 		}
 		else if(rdimg[i].state==1){
-			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,10,10);
+			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,20,20);
 		}
 		else if(rdimg[i].state==2){
-			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,10,10);
+			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,20,20);
 		}
 		else if(rdimg[i].state==3){
-			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,10,10);
+			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,20,20);
 		}
 	}
 	
