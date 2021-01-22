@@ -168,18 +168,19 @@ function draw() {
 	if (!tof) return;
 	for(var i=0;i<rdimg.length;i++){
 		if(rdimg[i].state==0){
-			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,5,5);
+			ctx.drawImage(stp,rdimg[i].width,rdimg[i].height,10,10);
 		}
 		else if(rdimg[i].state==1){
-			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,5,5);
+			ctx.drawImage(ght,rdimg[i].width,rdimg[i].height,10,10);
 		}
 		else if(rdimg[i].state==2){
-			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,5,5);
+			ctx.drawImage(grd,rdimg[i].width,rdimg[i].height,10,10);
 		}
 		else if(rdimg[i].state==3){
-			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,5,5);
+			ctx.drawImage(sup,rdimg[i].width,rdimg[i].height,10,10);
 		}
 	}
+	
 	for (let i = 0; i < balls.length; i++) {
 		if (
 			Math.sqrt(
